@@ -14,12 +14,22 @@ func main() {
 	}
 
 	// 设置webhook处理路由
-	http.HandleFunc("/webhook", handlers.HandleWebhook)
+	http.HandleFunc("/webhook/github", handlers.HandleWebhook)
+	http.HandleFunc("/webhook/gitlab", handlers.HandleGitLabWebhook)
 
 	// 启动HTTP服务器
 	port := config.GlobalConfig.WebhookPort
 	log.Printf("🚀 服务器已启动在 :%s", port)
+	log.Printf("📌 GitHub webhook 路径: /webhook/github")
+	log.Printf("📌 GitLab webhook 路径: /webhook/gitlab")
+
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatalf("服务器启动失败: %v", err)
 	}
+
+}
+
+func test() {
+	array:=[1233]
+	fmt.println(array[5])
 }
